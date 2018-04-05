@@ -1,5 +1,7 @@
 package com.afet;
 
+import com.afet.Entities.User;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -14,16 +16,25 @@ public class Main {
 //        System.out.println(Arrays.toString(ints));
 
 
-        List<String> string = new ArrayList<>();
-        string.add("One");
-        string.add("Twooo");
-        string.add("THree");
-        string.add("Fooooure");
-        string.add("Five");
-        string.add("in");
-        string.add("Oe");
-        System.out.println(Arrays.toString(string.toArray()));
-        System.out.println(longestString(string));
+//        List<String> string = new ArrayList<>();
+//        string.add("One");
+//        string.add("Twooo");
+//        string.add("THree");
+//        string.add("Fooooure");
+//        string.add("Five");
+//        string.add("in");
+//        string.add("Oe");
+//        System.out.println(Arrays.toString(string.toArray()));
+//        System.out.println(longestString(string));
+
+        List<User> users = new ArrayList<>();
+        users.add(new User("user","abvgd@mail.ru","123456"));
+        users.add(new User("user","bbvgd@mail.ru","123456"));
+        users.add(new User("user","bcbvgd@mail.ru","123456"));
+        users.add(new User("personOne","abvgd@mail.ru","123456"));
+        users.add(new User("wersonTwo","abvgd@mail.ru","123456"));
+        users.add(new User("aaaaaaa","abvgd@mail.ru","123456"));
+        System.out.println(sortByUsernameThenByEmail(users));
     }
 
     static Integer[] evenNumbersFromArray(Integer[] array) {
@@ -51,5 +62,12 @@ public class Main {
 //            }
 //        }).get();
     }
+
+    private static List<User> sortByUsernameThenByEmail(List<User> listOfUsers){
+        return listOfUsers.parallelStream().
+                sorted(Comparator.comparing(User::getUsername).
+                thenComparing(User::getEmail)).collect(Collectors.toList());
+    }
+
 
 }
